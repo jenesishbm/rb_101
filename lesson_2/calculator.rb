@@ -13,10 +13,10 @@ end
 # define method to convert operator to message
 def op_to_message(op)
   case op
-  when '1' then "Adding"
-  when '2' then "Subtracting"
-  when '3' then "Multiplying"
-  when '4' then "Dividing"
+  when '1' then return "Adding"
+  when '2' then return "Subtracting"
+  when '3' then return "Multiplying"
+  when '4' then return "Dividing"
   end
 end
 
