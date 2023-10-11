@@ -18,42 +18,42 @@ num2 = nil
 
 # collect number 1
 loop do
-  puts ">>Please enter your first number:"
+  puts '>>Please enter your first number:'
   num1 = gets.chomp
   break if valid_number?(num1)
-  puts "Invalid input. Only integers are allowed."
+  puts 'Invalid input. Only integers are allowed.'
 end
 
 # collect number 2
 loop do
-  puts ">>Please enter your second number:"
+  puts '>>Please enter your second number:'
   num2 = gets.chomp
   break if valid_number?(num2)
-  puts "Invalid input. Only integers are allowed."
+  puts 'Invalid input. Only integers are allowed.'
 end
 
 # collect operation
 loop do
-  puts ">> What type of operation would you like to perform?"
+  puts '> What type of operation would you like to perform?'
   puts "Type 'a' to add, 's' to subtract, 'm' to multiply or 'd' to divide."
   op = gets.chomp.downcase
-    if op == "d" && num2 == "0"
-      puts "You cannot divide by 0. Please select a different operation."
-    elsif ["a", "s", "m", "d"].include?(op)
+    if op == 'd' && num2 == '0'
+      puts 'You cannot divide by 0. Please select a different operation.'
+    elsif %w(a s m d).include?(op)
       break
     else
-    puts "Try again. Your answer was not a valid operation."
-  end
+      puts 'Try again. Your answer was not a valid operation.'
+    end
 end
 
 # print corresponding output
 case op
-  when "a"
-    puts "#{num1} + #{num2} = #{num1.to_i + num2.to_i}"
-  when "s"
-    puts "#{num1} - #{num2} = #{num1.to_i - num2.to_i}"
-  when "m"
-    puts "#{num1} x #{num2} = #{num1.to_i * num2.to_i}"
-  else
-    puts "#{num1} / #{num2} = #{num1.to_f / num2.to_f}"
+when 'a'
+  puts "#{num1} + #{num2} = #{num1.to_i + num2.to_i}"
+when 's'
+  puts "#{num1} - #{num2} = #{num1.to_i - num2.to_i}"
+when 'm'
+  puts "#{num1} x #{num2} = #{num1.to_i * num2.to_i}"
+else
+  puts "#{num1} / #{num2} = #{num1.to_f / num2.to_f}"
 end
