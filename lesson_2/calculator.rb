@@ -13,10 +13,10 @@ end
 # define method to convert operator to message
 def op_to_message(op)
   case op
-  when '1' then return "Adding"
-  when '2' then return "Subtracting"
-  when '3' then return "Multiplying"
-  when '4' then return "Dividing"
+  when '1' then "Adding"
+  when '2' then "Subtracting"
+  when '3' then "Multiplying"
+  when '4' then "Dividing"
   end
 end
 
@@ -28,7 +28,7 @@ op = nil
 result = nil
 
 # get name
-loop do 
+loop do
   prompt('Welcome to Calculator! Enter your name:')
   name = gets.chomp
   break unless name.empty?
@@ -63,18 +63,18 @@ loop do # initialize main loop
   MSG
 
   prompt(op_prompt)
-    loop do
-      op = gets.chomp.downcase
-      if op == '4' && num2 == '0'
-        prompt('You cannot divide by 0. Please select a different operation.')
-      elsif %w(1 2 3 4).include?(op)
-        break
-      else
-        prompt('Try again. You must choose 1, 2, 3, or 4.')
-      end
+  loop do
+    op = gets.chomp.downcase
+    if op == '4' && num2 == '0'
+      prompt('You cannot divide by 0. Please select a different operation.')
+    elsif %w(1 2 3 4).include?(op)
+      break
+    else
+      prompt('Try again. You must choose 1, 2, 3, or 4.')
     end
+  end
 
-    prompt("#{op_to_message(op)} #{num1} and #{num2}...")
+  prompt("#{op_to_message(op)} #{num1} and #{num2}...")
 
   # calculates corresponding output
   result = 
@@ -93,7 +93,7 @@ loop do # initialize main loop
 
   prompt("The result is #{result}.")
 
-  prompt("Do you want to preform another calculation? Type 'Y' to calculate again.")
+  prompt("Do you want to preform another calculation? Type 'Y' if so.")
   answer = gets.chomp
   break unless answer.downcase.start_with?('y')
 end
