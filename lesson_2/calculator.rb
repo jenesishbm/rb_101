@@ -1,5 +1,7 @@
 # CALCULATOR PROGRAM
 
+require "pry" # add this to use Pry
+
 # define method to check valid number
 def valid_number?(number_string)
   number_string.to_i.to_s == number_string
@@ -90,7 +92,7 @@ loop do # initialize main loop
   end
 
   # print result
-
+  binding.pry # execution will stop here
   prompt("The result is #{result}.")
 
   prompt("Do you want to preform another calculation? Type 'Y' if so.")
