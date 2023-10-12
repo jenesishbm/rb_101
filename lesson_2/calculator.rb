@@ -1,10 +1,22 @@
 # CALCULATOR PROGRAM
 
-require "pry" # add this to use Pry
+# require "pry" # add this to use Pry
+require 'yaml'
+MESSAGES = YAML.load_file('calculator_messages.yml')
 
-# define method to check valid number
-def valid_number?(number_string)
-  number_string.to_i.to_s == number_string
+# BONUS: define method to check if input is a valid integer
+def integer?(input)
+  input.to_i.to_s == input
+end
+
+# BONUS: define method to check if input is a valid float (decimal)
+def float?(input)
+  input.to_f.to_s == input
+end
+
+# BONUS: define method to check if input is a valid number (float or integer)
+def valid_number?(input)
+  integer?(input) || float(input)
 end
 
 # define prompt method to display prompts
@@ -31,48 +43,41 @@ result = nil
 
 # get name
 loop do
-  prompt('Welcome to Calculator! Enter your name:')
+  prompt(MESSAGES['welcome'])
   name = gets.chomp
   break unless name.empty?
-  prompt('Make sure to enter your name.')
+  prompt(MESSAGES['valid_name'])
 end
 
 prompt("Great! Hi #{name}")
 
 loop do # initialize main loop
   loop do # collect number 1
-    prompt('Please enter your first number:')
+    prompt(MESSAGES['first_num'])
     num1 = gets.chomp
-    break if valid_number?(num1)
-    prompt('Invalid input. Only integers are allowed.')
+    break if integer?(num1)
+    prompt(MESSAGES['num_error'])
   end
 
   # collect number 2
   loop do
-    prompt('Please enter your second number:')
+    prompt(MESSAGES['sec_num'])
     num2 = gets.chomp
-    break if valid_number?(num2)
-    prompt('Invalid input. Only integers are allowed.')
+    break if integer?(num2)
+    prompt(MESSAGES['num_error'])
   end
 
   # collect operation
-  op_prompt = <<-MSG
-    What operation would you like to perform?
-    1) add
-    2) subtract
-    3) multiply
-    4) divide
-  MSG
-
-  prompt(op_prompt)
+  
+  prompt(MESSAGES['operation'])
   loop do
     op = gets.chomp.downcase
     if op == '4' && num2 == '0'
-      prompt('You cannot divide by 0. Please select a different operation.')
+      prompt(MESSAGES['zero_error'])
     elsif %w(1 2 3 4).include?(op)
       break
     else
-      prompt('Try again. You must choose 1, 2, 3, or 4.')
+      prompt(MESSAGES['op_error'])
     end
   end
 
@@ -92,13 +97,13 @@ loop do # initialize main loop
   end
 
   # print result
-  binding.pry # execution will stop here
+  # binding.pry # execution will stop here
   prompt("The result is #{result}.")
 
-  prompt("Do you want to preform another calculation? Type 'Y' if so.")
+  prompt(MESSAGES['again'])
   answer = gets.chomp
   break unless answer.downcase.start_with?('y')
 end
 
 # final goodbye
-prompt("Thanks for using the calculator. Bye bye!")
+prompt(MESSAGES['bye'])
