@@ -16,7 +16,7 @@ end
 
 # BONUS: define method to check if input is a valid number (float or integer)
 def valid_number?(input)
-  integer?(input) || float(input)
+  integer?(input) || float?(input)
 end
 
 # define prompt method to display prompts
@@ -68,7 +68,7 @@ loop do # initialize main loop
   end
 
   # collect operation
-  
+
   prompt(MESSAGES['operation'])
   loop do
     op = gets.chomp.downcase
