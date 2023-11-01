@@ -37,11 +37,22 @@ puts a.fetch(7) { |index| index**2 } # 49 (value returnd by the block)
 # Wrong guess: 3, 5, 8
 # REVIEW: 5.step indicates that iteration starts at 5. Therefore, it puts values from 5 to 10, counting by 3. 
 
-# 7. Look in documentation for methods for Object (parent of String) to find the answer
+# 7. 
+# Need to look in documentation for methods for Object (parent of String) to find the answer
 
 s = 'abc'
 puts s.public_methods(false).inspect
 
-# 8.
+# 8. Find the documentation for the #min method and change the code to print the two smallest values in the Array.
+
 a = [5, 9, 3, 11]
 puts a.min(2)
+
+# 9. Find the documentation for YAML::load_file.
+
+require 'yaml'
+MESSAGES = YAML.load_file('calculator_messages.yml')
+
+# https://ruby-doc.org/3.2.2/exts/psych/Psych.html#method-c-load_file
+# the YAML ruby page doesn't say much but states that YAML is an alias of Psych
+# That tells us to go back to the Standard Library API page and click on psych to find ::load_file
