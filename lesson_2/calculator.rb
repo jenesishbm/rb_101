@@ -107,3 +107,110 @@ end
 
 # final goodbye
 prompt(MESSAGES['bye'])
+
+
+################################## ATTEMPT 2 ##########################################
+
+=begin PEDAC
+  1) ask user for number 1
+    -validate input
+  2) ask user for number 2
+    -validate input
+  3) ask user for operation
+    -validate input
+  4) preform the operation with the two numbers
+  5) return the result
+=end
+
+# prints message with => in front to indicate prompt
+def prompt(message)
+  puts "=> #{message}"
+end
+
+# validates that input is a valid integer. some loopholes but good enough for now.
+def integer?(num)
+  num.to_i != 0
+end
+
+# returns appropriate method for each operation
+def op_to_message(op)
+  case op
+  when 1
+    "Adding"
+  when 2
+    "Subtracting"
+  when 3
+    "Multiplying"
+  when 4
+    "Dividing"
+  end
+end
+
+#  initialize variables outside of loop
+name = nil
+num1 = nil
+num2 = nil
+op = nil
+result = nil
+
+prompt("Welcome to the calculator!")
+
+loop do
+  prompt("What is your name?")
+  name = gets.chomp
+  break unless name.empty?
+end
+
+prompt("Hi #{name}!")
+
+loop do # main loop
+  loop do
+    prompt("What is the first number?")
+    num1 = gets.chomp.to_i
+    break if integer?(num1)
+    prompt("Try again. Invalid integer.")
+  end
+
+  loop do
+    prompt("What is the second number?")
+    num2 = gets.chomp.to_i
+    break if integer?(num2)
+    prompt("Try again. Invalid integer.")
+  end
+
+  op_prompt = <<-MSG # MSG is a placeholder, can be anything as long as it matches at the beginning and the end
+    What operation would you like to preform?
+    1) add 
+    2) subtract 
+    3) multiply 
+    4) division
+  MSG
+
+  loop do
+    prompt(op_prompt)
+    op = gets.chomp.to_i
+    break if [1,2,3,4].include?(op)
+    prompt("Try again. You must enter 1, 2, 3, or 4.")
+  end
+
+  case op
+  when 1
+    result = "#{num1} + #{num2} = #{num1 + num2}"
+  when 2
+    result = "#{num1} - #{num2} = #{num1 - num2}"
+  when 3
+    result = "#{num1} * #{num2} = #{num1 * num2}"
+  when 4
+    result = "#{num1} / #{num2} = #{num1.to_f / num2.to_f}"
+  end
+
+  prompt("#{op_to_message(op)} the two numbers...")
+
+  prompt(result)
+
+  prompt("Do you want to go again? Type 'y' or 'n'")
+  again = gets.chomp.downcase
+  break unless again == "y"
+end # end main loop
+
+prompt("Thank you for using the calculator!")
