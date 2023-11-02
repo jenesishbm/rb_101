@@ -68,13 +68,39 @@ end
 # 6. write a method named xor that takes two arguments, and returns true if exactly one of its arguments is truthy, false otherwise.
 
 def xor?(arg1, arg2)
-  if arg1 == true && arg2 == false
-    return true
-  elsif arg1 == false && arg2 == true
-    return true
-  else
-    return false
-  end
+  return true if arg1 && !arg2
+  return true if !arg1 && arg2
+  false
 end
 
-# 7.
+# 7. Write a method that returns true if the string passed as an argument is a palindrome, false otherwise. A palindrome reads the same forward and backward. For this exercise, case matters as does punctuation and spaces.
+def string_palindrome?(string)
+  string == string.reverse
+end
+
+# further exploration: write a method that determines whether an array is palindromic;
+def array_palindrome?(array)
+  array == array.reverse
+end
+
+# further exploration: write a method that determines whether an array or a string is palindromic
+def palindrome?(input)
+  input == input.reverse
+end
+
+# 8. Write another method that returns true if the string passed as an argument is a palindrome, false otherwise. This time, however, your method should be case-insensitive, and it should ignore all non-alphanumeric characters.
+def real_palindrome?(str)
+  str = str.downcase.delete('^a-z0-9') #removes anything that's not 0-9 or a-z ( ^a-z0-9 )
+  palindrome?(str)
+end
+
+# 9. 
+def palindromic_number?(num)
+  palindrome?(num.to_s) # can't call reverse on an integer
+end
+
+# 10. Write a method that takes a string argument, and returns true if all of the alphabetic characters inside the string are uppercase, false otherwise. Characters that are not alphabetic should be ignored.
+def uppercase?(str)
+  str = str.delete('^a-zA-Z') # this line is not necessary since .upcase doesn't affect numbers
+  str == str.upcase
+end
