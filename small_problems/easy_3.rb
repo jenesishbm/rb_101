@@ -1,5 +1,6 @@
 # EASY 3
 
+####################################### ATTEMPT 1 #################################################
 # 1. Write a program that solicits 6 numbers from the user, then prints a message that describes whether or not the 6th number appears amongst the first 5 numbers.
 nums = []
 
@@ -104,3 +105,5 @@ def uppercase?(str)
   str = str.delete('^a-zA-Z') # this line is not necessary since .upcase doesn't affect numbers
   str == str.upcase
 end
+
+####################################### ATTEMPT 2 #################################################

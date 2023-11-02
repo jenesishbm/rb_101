@@ -1,4 +1,5 @@
 # EASY 1
+####################################### ATTEMPT 1 #################################################
 
 # 1. Write a method that takes two arguments, a string and a positive integer, and prints the string as many times as the integer indicates.
 
@@ -159,3 +160,5 @@ center_of('Launch School') == ' '
 center_of('Launch') == 'un'
 center_of('Launchschool') == 'hs'
 center_of('x') == 'x'
+
+####################################### ATTEMPT 2 #################################################

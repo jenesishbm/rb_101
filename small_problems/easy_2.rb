@@ -1,11 +1,6 @@
 # EASY 2
 
-=begin
-TO REVIEW: 
-* yaml files for code
-* alternative formatting (i.e. #{format("$%.2f", tip)} for # 3)
-*
-=end
+####################################### ATTEMPT 1 #################################################
 
 # 1. Build a program that randomly generates and prints Teddy's age. To get the age, you should generate a random number between 20 and 200.
 
@@ -184,3 +179,5 @@ calculation
 def negative(num)
   num > 0 ? -num : num # use ternary operators when there are only 2 choices
 end
+
+####################################### ATTEMPT 2 #################################################
