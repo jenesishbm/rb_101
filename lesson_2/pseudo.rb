@@ -6,19 +6,12 @@ To practice, write out pseudo-code (both casual and formal) that does the follow
 
 1) a method that returns the sum of two integers
 
-  1C)
-  create method that takes 2 integers
-  in the body of the method block, add the 2 integers together
-  return sum
-
   1F)
   START
-
-  DEFINE "sum_2" method
-  SET input to take 2 integers (num1, num2)
-  ADD num1 + num2
-  RETURN
-
+  Define "sum" method
+  Take 2 numbers as input(num1, num2)
+  Add num1 + num2
+  Return sum
   END
 
 2) a method that takes an array of strings, and returns a string that is all those strings concatenated together
@@ -35,7 +28,7 @@ DEFINE "concat" method
 SET input to take an array of strings (arr)
 CREATE new variable new_string
 ADD << each string to new_string
-RETURN new_strnig
+RETURN new_string
 END
 
 
