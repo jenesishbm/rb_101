@@ -86,7 +86,7 @@ loop do
   Your total loan duration is #{d_months.truncate(2)} months.
   Your monthly payment is $#{due_monthly.truncate(2)}.
   MSG
-  
+
   prompt(results)
 
   prompt("Another calculation?")

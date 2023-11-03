@@ -2,10 +2,6 @@
 
 CHOICES = ["rock", "paper", "scissors"] # constant variable with array of valid choices
 
-def test_method
-  prompt('test message')
-end
-
 def prompt(message)
   puts(" => #{message}")
 end
