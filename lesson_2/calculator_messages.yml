@@ -1,15 +1,33 @@
-welcome: "Welcome to Calculator! Enter your name:"
-valid_name: "Make sure to enter a valid name."
-first_num: "Please enter the first number:"
-sec_num: "Please enter the second number:"
-num_error: "Invalid input. Only integers are allowed."
-operation: | #use to create multi-line messages
-    What operation would you like to perform?
-    1) add
-    2) subtract
-    3) multiply
-    4) divide
-zero_error: You cannot divide by 0. Please select a different operation.
-op_error: Try again. You must choose 1, 2, 3, or 4.
-again: Do you want to preform another calculation? Type 'Y' if so.
-bye: Thanks for using the calculator. Bye bye! #no need for quotes if no special symbols
+en:
+  welcome: "Welcome to Calculator! Enter your name:"
+  valid_name: "Make sure to enter a valid name."
+  first_num: "Please enter the first number:"
+  sec_num: "Please enter the second number:"
+  num_error: "Invalid input. Only integers are allowed."
+  operation: | #use to create multi-line messages
+      What operation would you like to perform?
+      1) add
+      2) subtract
+      3) multiply
+      4) divide
+  zero_error: You cannot divide by 0. Please select a different operation.
+  op_error: Try again. You must choose 1, 2, 3, or 4.
+  again: Do you want to preform another calculation? Type 'Y' if so.
+  bye: Thanks for using the calculator. Bye bye! #no need for quotes if no special symbols
+
+es:
+  welcome: "¡Bienvenido a Calculadora! Entre su nombre:"
+  valid_name: "Asegúrate de ingresar un nombre válido."
+  first_num: "Por favor ingresa el primer número:"
+  sec_num: "Por favor ingresa el segundo número:"
+  num_error: "Entrada no válida. Sólo se permiten números enteros."
+  operation: |
+      ¿Qué operación te gustaría realizar?
+       1) agregar
+       2) restar
+       3) multiplicar
+       4) dividir
+  zero_error: "No se puede dividir entre 0. Seleccione una operación diferente."
+  op_error: "Inténtalo de nuevo. Debes elegir 1, 2, 3 o 4."
+  again: "¿Quiere realizar otro cálculo? Escriba 'Y' si es así."
+  bye: "Gracias por usar la calculadora. ¡Adiós!"

@@ -4,9 +4,16 @@
 require 'yaml'
 MESSAGES = YAML.load_file('calculator_messages.yml')
 
+# method to select correct message
+def messages(message, lang='en')
+  MESSAGES[lang][message]
+end
+
+LANGUAGE = 'en' # change to 'es' for spanish
+
 # BONUS: define method to check if input is a valid integer
 def integer?(input)
-  input.to_i.to_s == input
+  input.to_i.to_s == input # checks if input can be converted to an integer without losing any information
 end
 
 # BONUS: define method to check if input is a valid float (decimal)
@@ -43,41 +50,41 @@ result = nil
 
 # get name
 loop do
-  prompt(MESSAGES['welcome'])
+  prompt(messages('welcome', LANGUAGE))
   name = gets.chomp
   break unless name.empty?
-  prompt(MESSAGES['valid_name'])
+  prompt(messages('valid_name', LANGUAGE))
 end
 
 prompt("Great! Hi #{name}")
 
 loop do # initialize main loop
   loop do # collect number 1
-    prompt(MESSAGES['first_num'])
+    prompt(messages('first_num', LANGUAGE))
     num1 = gets.chomp
     break if integer?(num1)
-    prompt(MESSAGES['num_error'])
+    prompt(messages('num_error', LANGUAGE))
   end
 
   # collect number 2
   loop do
-    prompt(MESSAGES['sec_num'])
+    prompt(messages('sec_num', LANGUAGE))
     num2 = gets.chomp
     break if integer?(num2)
-    prompt(MESSAGES['num_error'])
+    prompt(messages('num_error', LANGUAGE))
   end
 
   # collect operation
 
-  prompt(MESSAGES['operation'])
+  prompt(messages('operation', LANGUAGE))
   loop do
     op = gets.chomp.downcase
     if op == '4' && num2 == '0'
-      prompt(MESSAGES['zero_error'])
+      prompt(messages('zero_error', LANGUAGE))
     elsif %w(1 2 3 4).include?(op)
       break
     else
-      prompt(MESSAGES['op_error'])
+      prompt(messages('op_error', LANGUAGE))
     end
   end
 
@@ -96,121 +103,15 @@ loop do # initialize main loop
     num1.to_f / num2.to_f
   end
 
-  # print result
   # binding.pry # execution will stop here
-  prompt("The result is #{result}.")
 
-  prompt(MESSAGES['again'])
+  # print result
+  prompt("The result is #{result}") # need to fix this for spanish
+
+  prompt(messages('again', LANGUAGE))
   answer = gets.chomp
   break unless answer.downcase.start_with?('y')
 end
 
 # final goodbye
-prompt(MESSAGES['bye'])
-
-
-################################## ATTEMPT 2 ##########################################
-
-=begin PEDAC
-  1) ask user for number 1
-    -validate input
-  2) ask user for number 2
-    -validate input
-  3) ask user for operation
-    -validate input
-  4) preform the operation with the two numbers
-  5) return the result
-=end
-
-# prints message with => in front to indicate prompt
-def prompt(message)
-  puts "=> #{message}"
-end
-
-# validates that input is a valid integer. some loopholes but good enough for now.
-def integer?(num)
-  num.to_i != 0
-end
-
-# returns appropriate method for each operation
-def op_to_message(op)
-  case op
-  when 1
-    "Adding"
-  when 2
-    "Subtracting"
-  when 3
-    "Multiplying"
-  when 4
-    "Dividing"
-  end
-end
-
-#  initialize variables outside of loop
-name = nil
-num1 = nil
-num2 = nil
-op = nil
-result = nil
-
-prompt("Welcome to the calculator!")
-
-loop do
-  prompt("What is your name?")
-  name = gets.chomp
-  break unless name.empty?
-end
-
-prompt("Hi #{name}!")
-
-loop do # main loop
-  loop do
-    prompt("What is the first number?")
-    num1 = gets.chomp.to_i
-    break if integer?(num1)
-    prompt("Try again. Invalid integer.")
-  end
-
-  loop do
-    prompt("What is the second number?")
-    num2 = gets.chomp.to_i
-    break if integer?(num2)
-    prompt("Try again. Invalid integer.")
-  end
-
-  op_prompt = <<-MSG # MSG is a placeholder, can be anything as long as it matches at the beginning and the end
-    What operation would you like to preform?
-    1) add 
-    2) subtract 
-    3) multiply 
-    4) division
-  MSG
-
-  loop do
-    prompt(op_prompt)
-    op = gets.chomp.to_i
-    break if [1,2,3,4].include?(op)
-    prompt("Try again. You must enter 1, 2, 3, or 4.")
-  end
-
-  case op
-  when 1
-    result = "#{num1} + #{num2} = #{num1 + num2}"
-  when 2
-    result = "#{num1} - #{num2} = #{num1 - num2}"
-  when 3
-    result = "#{num1} * #{num2} = #{num1 * num2}"
-  when 4
-    result = "#{num1} / #{num2} = #{num1.to_f / num2.to_f}"
-  end
-
-  prompt("#{op_to_message(op)} the two numbers...")
-
-  prompt(result)
-
-  prompt("Do you want to go again? Type 'y' or 'n'")
-  again = gets.chomp.downcase
-  break unless again == "y"
-end # end main loop
-
-prompt("Thank you for using the calculator!")
+prompt(messages('bye', LANGUAGE))

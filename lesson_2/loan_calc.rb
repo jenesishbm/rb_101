@@ -1,13 +1,15 @@
 # ASSIGNMENT: Mortgage / Car Loan Calculator
 
 =begin PSEUDO-CODE
-Collect loan amount and verify it's a valid input
-Collect Annual Percentage Rate (APR) and verify it's a valid input
-Collect loan duration and verify it's a valid input
+START
+GET loan amount and verify it's a valid input
+GET Annual Percentage Rate (APR) and verify it's a valid input
+GET loan duration and verify it's a valid input
 
 Calculate monthly interest rate
 Calculate loan duration in months
 Calculate monthly payment
+END
 =end
 
 # define prompt method
@@ -25,7 +27,7 @@ def float?(input)
   input.to_f.to_s == input
 end
 
-# BONUS: define method to check if input is a valid number (float or integer)
+# BONUS: define method to check if input is a valid non-zero number (float or integer)
 def valid_number?(input)
   ( integer?(input) || float?(input) ) && input.to_f > 0
 end
@@ -78,10 +80,14 @@ loop do
                 (monthly_i / (1 - (1 + monthly_i)**(-d_months)))
 
   # Print results
-  prompt("Here are your results:")
-  prompt("Your monthly interest rate is #{monthly_i.truncate(4)}.")
-  prompt("Your total loan duration is #{d_months.truncate(2)} months.")
-  prompt("Your monthly payment is $#{due_monthly.truncate(2)}.")
+  results = <<-MSG
+  Here are your results:
+  Your monthly interest rate is #{monthly_i.truncate(4)}.
+  Your total loan duration is #{d_months.truncate(2)} months.
+  Your monthly payment is $#{due_monthly.truncate(2)}.
+  MSG
+  
+  prompt(results)
 
   prompt("Another calculation?")
   answer = gets.chomp
