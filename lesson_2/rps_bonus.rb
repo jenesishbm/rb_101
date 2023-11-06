@@ -1,17 +1,23 @@
 # ROCK PAPER SCISSORS LIZARD SPOCK BONUS GAME
 
-TRANSLATE_CHOICES = { r: "rock", p: "paper", s: "scissors", l: "lizard", sp: "spock" }
-
 CHOICES_KEY = {
-  "rock" => {abbreviation: 'r', beats: ['scissors', 'lizard']},
-  "paper" => {abbreviation: 'p', beats: ['rock', 'spock']},
-  "scissors" => {abbreviation: 's', beats: ['paper', 'lizard']},
-  "lizard" => {abbreviation: 'l', beats: ['paper', 'spock']},
-  "spock" => {abbreviation: 'sp', beats: ['rock', 'scissors']}
+  "rock" => { abbreviation: 'r', beats: ['scissors', 'lizard'] },
+  "paper" => { abbreviation: 'p', beats: ['rock', 'spock'] },
+  "scissors" => { abbreviation: 's', beats: ['paper', 'lizard'] },
+  "lizard" => { abbreviation: 'l', beats: ['paper', 'spock'] },
+  "spock" => { abbreviation: 'sp', beats: ['rock', 'scissors'] }
 }
 
 def prompt(message)
   puts(" => #{message}")
+end
+
+def abbrev?(input)
+  CHOICES_KEY.values.map { |choice| choice[:abbreviation] }.include?(input)
+end
+
+def find_key_by_abbrev(input)
+  CHOICES_KEY.each { |key, value| return key if value[:abbreviation] == input }
 end
 
 def win?(first, second)
@@ -42,12 +48,11 @@ loop do
       prompt("Choose one: #{CHOICES_KEY.keys.join(', ')}")
       prompt("Type 'r' for rock, 'p' for paper, 's' for scissors, 'l' for lizard, or 'sp' for spock.")
       user_choice = gets.chomp.downcase
-      break if CHOICES_KEY.values.map { |choice| choice[:abbreviation] }.include?(user_choice)
+      break if abbrev?(user_choice)
       puts "That's not a valid choice. Try again."
     end
 
-    user_choice = TRANSLATE_CHOICES[user_choice.to_sym]
-
+    user_choice = find_key_by_abbrev(user_choice)
     comp_choice = CHOICES_KEY.keys.sample
 
     prompt("You chose #{user_choice}. Computer chose #{comp_choice}.")
@@ -74,4 +79,4 @@ loop do
   break unless again.start_with?("y")
 end
 
-prompt("Thank you for playing!")
+prompt("Thank you for playing. Goodbye!")
