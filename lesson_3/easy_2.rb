@@ -5,7 +5,8 @@
 ages = { "Herman" => 32, "Lily" => 30, "Grandpa" => 402, "Eddie" => 10 }
 
 ages.include?("Spot")
-ages.key?("Spot") # review
+ages.key?("Spot")
+ages.has_key?("Spot")
 ages.member?("Spot") # review
 
 # 2. Convert the string in the following ways:
@@ -30,7 +31,7 @@ ages["Spot"] = 237
 advice = "Few things in life are as important as house training your pet dinosaur."
 
 advice.include?("dino") # can input "dino " if we want to check if its included on its own
-advice.match?("dino") # LS
+advice.match?("dino") # LS solution: not a perfect solution as it would match any substring with dino in it
 
 # 5. Show an easier way to write this array:
 
