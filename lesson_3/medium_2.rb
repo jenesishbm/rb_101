@@ -61,10 +61,11 @@ end
 
 my_string = "pumpkins"
 my_array = ["pumpkins"]
-not_so_tricky_method(my_string, my_array)
+my_string, my_array = not_so_tricky_method(my_string, my_array) # multiple variable assignment
+# #not_so_tricky_method returns two values which are assigned to my_string and my array, respectively
 
-puts "My string looks like this now: #{my_string}"
-puts "My array looks like this now: #{my_array}"
+puts "My string looks like this now: #{my_string}" # => pumpkinsrutabaga
+puts "My array looks like this now: #{my_array}" # => ["pumpkins", "rutabaga"]
 
 # 6. How could the following method be simplified without changing its return value?
 # before
@@ -78,13 +79,10 @@ end
 
 # simplified
 def color_valid(color)
-  (color == "blue" || color == "green")? true : false
-end
-
-# even further
-def color_valid(color)
   color == "blue" || color == "green"
 end
 
 color_valid("blue")
 color_valid("red")
+
+

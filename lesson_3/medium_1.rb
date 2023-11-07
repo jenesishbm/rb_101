@@ -1,7 +1,7 @@
 # PRACTICE PROBLEMS: MEDIUM 1
 
 # 1. For this practice problem, write a one-line program that creates the following output 10 times, with the subsequent line indented 1 space to the right:
-10.times { |number| puts (" " * number) + "The Flinstones Rock!"}
+10.times { |i| puts (" " * i) + "The Flinstones Rock!"} # returns 10
 # review
 
 # 2. The result of the following statement will be an error. Why is this and what are two possible ways to fix this?
@@ -94,7 +94,7 @@ def rps(fist1, fist2)
 end
 
 puts rps(rps(rps("rock", "paper"), rps("rock", "scissors")), "rock")
-# returns paper
+# simplifies to rps("paper", "rock) which => paper
 
 # 9. Consider these two simple methods:
 
@@ -109,5 +109,6 @@ end
 # What would be the return value of the following method invocation?
 bar(foo)
 
-# returns no. Because the value returned from the foo method will always be "yes" , and "yes" == "no" will be false.
+# => no. 
+# Because the value returned from the foo method will always be "yes" , and "yes" == "no" will be false.
 
