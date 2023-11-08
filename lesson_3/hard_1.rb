@@ -41,21 +41,6 @@ puts greetings # => { a: 'hi there' }
 
 # 4. REVIEW
 
-# first attempt
-def dot_separated_ip_address?(input_string)
-  dot_separated_nums = input_string.split(".")
-
-  if dot_separated_nums.size == 4
-    until dot_separated_nums.empty? do
-      num = dot_separated_num.pop
-      break unless is_an_ip_number?(num)
-      return false
-    end
-    return true
-  else
-    return false
-end
-
 # LS solution ~ cleaner code than my attempt
 
 def dot_separated_ip_address?(input_string)
