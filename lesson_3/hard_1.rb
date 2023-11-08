@@ -7,8 +7,9 @@ end
 
 greeting
 
-# I expect greeting to be nil and/or for there to be an error. If statements default to truthy so, as written, greeting has not been initialized.
-# LS: Greeing is nil. Typically, when you reference an uninitialized variable, Ruby will raise an exception, stating that it’s undefined. However, when you initialize a local variable within an if clause, even if that if clause doesn’t get executed, the local variable is initialized to nil.
+# I expect greeting to be nil and/or for there to be an error. If statements default to truthy so, as written, greeting has not been defined.
+# LS: Greeing is nil and there is no error message. 
+# Typically, when you reference an uninitialized variable, Ruby will raise an exception, stating that it’s undefined. However, when you initialize a local variable within an if clause, even if that if clause doesn’t get executed, the local variable is initialized to nil.
 
 # 3. What is the result of the last line in the code below?
 greetings = { a: 'hi' }
@@ -58,12 +59,12 @@ end
 # LS solution ~ cleaner code than my attempt
 
 def dot_separated_ip_address?(input_string)
-  dot_separated_nums = input_string.split(".")
-  return false unless dot_separated_nums.size == 4
+  dot_separated_nums = input_string.split(".") # split into an array of "nums"
+  return false unless dot_separated_nums.size == 4 # false if wrong # of "nums"
 
   until dot_separated_nums.empty? do
     num = dot_separated_num.pop
-    return false unless is_an_ip_number?(num)
+    return false unless is_an_ip_number?(num) # return false unless each is an ip number
   end
 
   return true
