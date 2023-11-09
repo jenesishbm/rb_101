@@ -107,3 +107,110 @@ def uppercase?(str)
 end
 
 ####################################### ATTEMPT 2 #################################################
+
+# 1.
+arr = []
+iteration = %w(1st 2nd 3rd 4th 5th)
+
+until iteration.empty?
+  puts "==> Enter the #{iteration.shift} number:"
+  num = gets.chomp.to_i
+  arr << num
+end
+
+puts "==> Enter the last number:"
+last = gets.chomp.to_i
+
+def result(array, num)
+  array.include?(num) ? "The number #{num} appears in #{array}." : "The number #{num} does NOT appear in #{array}."
+end
+
+puts result(arr, last)
+
+# 2.
+
+puts "==> Enter the first number:"
+first = gets.chomp.to_i
+
+puts "==> Enter the second number:"
+second = gets.chomp.to_i
+
+puts <<-MSG
+#{first} + #{second} = #{first + second}
+#{first} - #{second} = #{first - second}
+#{first} * #{second} = #{first * second}
+#{first} / #{second} = #{first / second}
+#{first} % #{second} = #{first % second}
+#{first} ** #{second} = #{first ** second}
+MSG
+
+# 3.
+puts "Please write word or multiple words:"
+input = gets.chomp
+
+input_no_spaces = input.delete(" ")
+
+puts "There are #{input_no_spaces.size} characters in '#{input}'."
+
+# 4.
+def multiply(n1, n2)
+  n1 * n2
+end
+
+multiply(5, 3) == 15
+
+# 5. 
+def square(n)
+  multiply(n, n)
+end
+
+# further exploration
+def power_to_the_n(base, power)
+  multiply(base, 1) ** power
+end
+
+# 6. 
+def xor?(op1, op2)
+  return true if op1 && !op2 # need explicit return to work
+  return true if !op1 && op2 # otherwise it will always return false
+  false
+end
+
+xor?(5.even?, 4.even?) == true
+xor?(5.odd?, 4.odd?) == true
+xor?(5.odd?, 4.even?) == false
+xor?(5.even?, 4.odd?) == false
+
+# 7.
+def palindrome?(str)
+  str == str.reverse
+end
+
+palindrome?('madam') == true
+palindrome?('Madam') == false          # (case matters)
+
+# 8. REVIEW ('^a-z0-9')
+def real_palindrome?(str)
+  str = str.downcase.delete('^a-z0-9') #removes case sensitivity and deletes anything that's not (^) 0-9 or a-z ( ^a-z0-9 )
+  palindrome?(str)
+end
+
+real_palindrome?('madam') == true
+real_palindrome?('Madam') == true           # (case does not matter)
+real_palindrome?("Madam, I'm Adam") == true # (only alphanumerics matter)
+real_palindrome?('356a653') == true
+real_palindrome?('123ab321') == false
+
+# 9. 
+def palindromic_number?(num)
+  palindrome?(num.to_s)
+end
+
+palindromic_number?(34543) == true
+palindromic_number?(123210) == false
+palindromic_number?(5) == true
+
+# 10.
+def uppercase?(str)
+  str == str.upcase
+end

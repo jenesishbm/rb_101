@@ -181,3 +181,117 @@ def negative(num)
 end
 
 ####################################### ATTEMPT 2 #################################################
+# 1.
+puts "Whose age would you like to know?"
+name = gets.chomp
+name = "Teddy" if name.empty?
+
+def display_age(who="Teddy")
+  age = rand(20..200)
+  puts "#{who.capitalize} is #{age} years old!"
+end
+
+display_age(name)
+
+# 2. 
+
+M_TO_FT = 10.7639
+
+puts "Enter the length of the room in meters:"
+length_m = gets.chomp.to_f
+
+puts "Enter the width of the room in meters:"
+width_m = gets.chomp.to_f
+
+area_m = length_m * width_m
+area_ft = area_m * M_TO_FT
+
+puts "The area of the room is #{area_m} square meters (#{area_ft.round(2)} square feet)."
+
+# 3. 
+
+puts "How much is the bill? ($)"
+bill = gets.chomp.to_f
+
+puts "How much would you like to tip? (%)?"
+tip_p = (gets.chomp.to_f / 100)
+
+tip = (bill*tip_p).round(2)
+total = (bill + tip).round(2)
+
+puts "The tip is $#{format('%.2f', tip)}"
+puts "The total is $#{format('%.2f', total)}"
+
+# 4.
+puts "What is your age?"
+current_age = gets.chomp.to_i
+
+puts "At what age would you like to retire?"
+retire_age = gets.chomp.to_i
+
+years_left = retire_age - current_age
+
+current_year = Time.now.year
+retire_year = current_year + years_left
+
+puts "It's #{current_year}. You will retire in #{retire_year}."
+puts "You have #{years_left} years to go!"
+
+# 5.
+def shouting?(word)
+  word.end_with?("!")
+end
+
+puts "What is your name?"
+name = gets.chomp
+
+if shouting?(name)
+  puts "HELLO #{name.chop.upcase}. WHY ARE WE YELLING?!"
+elsif name.empty?
+  puts "You forgot to tell me your name."
+else
+  puts "Hi #{name.capitalize}. Welcome!"
+end
+
+# 6.
+
+(1..99).each { |num| puts num if num.odd? }
+(1..99).step(2) { |num| puts num }
+
+# 7. 
+(1..99).each { |num| puts num if num.even? }
+(2..99).step(2) { |num| puts num }
+
+# 8
+def compute_sum(num)
+  sum = 0
+  (1..num).each { |i| sum += i }
+  sum
+end
+
+def compute_product(num)
+  product = 1
+  (1..num).each { |i| product *= i }
+  product
+end
+
+puts "Please enter an integer greater than 0:"
+value = gets.chomp.to_i
+
+puts "Enter 's' to compute the sum, 'p' to compute the product."
+operation = gets.chomp.downcase
+
+if operation == "s"
+  sum = compute_sum(number)
+  puts "The sum of the integers between 1 and #{value} is #{sum}."
+elsif operation == "p"
+  product = compute_product(number)
+  puts "The product of the integers between 1 and #{value} is #{product}."
+else
+  puts "Oops. Unknown operation."
+end
+
+# 10.
+def negative(num)
+  num > 0 ? -num : num
+end

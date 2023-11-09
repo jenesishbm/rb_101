@@ -162,3 +162,171 @@ center_of('Launchschool') == 'hs'
 center_of('x') == 'x'
 
 ####################################### ATTEMPT 2 #################################################
+
+# 1. 
+def repeat(str, num)
+  num.times { puts str }
+end
+
+repeat('Hello', 3)
+
+# 2. 
+
+def is_odd?(num)
+  num.abs % 2 != 0
+end
+
+puts is_odd?(2)    # => false
+puts is_odd?(5)    # => true
+puts is_odd?(-17)  # => true
+
+# 3. 
+def stringy(num)
+  str = ''
+  until str.length == num
+    str.end_with?('1') ? str << '0' : str << '1'
+  end
+  str
+end
+
+puts stringy(6) == '101010'
+puts stringy(9) == '101010101'
+
+# 4.
+def calculate_bonus(salary, bonus)
+  bonus ? (salary / 2) : 0
+end
+
+puts calculate_bonus(2800, true) == 1400
+puts calculate_bonus(1000, false) == 0
+puts calculate_bonus(50000, true) == 25000
+
+# 5. REVIEW AGAIN. ISSUE GETTING "-"*num to work originally
+def print_in_box(message)
+  horizontal = "+#{'-' * (message.size + 2)}+"
+  empty_line = "|#{' ' * (message.size + 2)}|"
+  
+  puts horizontal
+  puts empty_line
+  puts "| #{message} |"
+  puts empty_line
+  puts horizontal
+end
+
+print_in_box('To boldly go where no one has gone before.')
+print_in_box(' ')
+
+# NICE LS USER SOLUTION
+def print_in_box(str)
+  dashes = ''
+  spaces = ''
+  str.size.times { dashes << '-' }
+  str.size.times { spaces << ' ' }
+
+  puts "+-#{dashes}-+"
+  puts "| #{spaces} |"
+  puts "| #{str} |"
+  puts "| #{spaces} |"
+  puts "+-#{dashes}-+"
+end
+
+# Further exploration
+
+def print_in_box_truncate(message)
+  message = message[0..76]
+  horizontal = "+#{'-' * (message.size + 2)}+"
+  empty_line = "|#{' ' * (message.size + 2)}|"
+  
+  puts horizontal
+  puts empty_line
+  puts "| #{message} |"
+  puts empty_line
+  puts horizontal
+end
+
+print_in_box_truncate("once upon a time a long time ago there was a boy and he was learning how to code and this message is too long for this method uh oh")
+
+# 6. REVIEW. BE ABLE TO SOLVE WITHOUT RJUST METHOD.
+def triangle(num)
+  stars = 0
+  until stars > num
+    puts ("*" * counter).rjust(num)
+    stars += 1
+  end
+end
+
+# OR
+
+def triangle(num)
+  num.times { |i| puts ('*' * (i + 1)).rjust(num) }
+end
+
+# LS Solution
+def triangle(num)
+  spaces = num - 1
+  stars = 1
+
+  num.times do |n|
+    puts (' ' * spaces) + ('*' * stars)
+    spaces -= 1
+    stars += 1
+  end
+end
+
+# 7. 
+loop do
+  puts "Enter a noun:"
+  noun = gets.chomp.downcase
+
+  puts "Enter a verb:"
+  verb = gets.chomp.downcase
+
+  puts "Enter an adjective:"
+  adj = gets.chomp.downcase
+
+  puts "Enter an adverb:"
+  adv = gets.chomp.downcase
+
+  puts "What kind of story do you want to hear?"
+  puts "Type 'f' for funny, 's' for scary, or 'h' for happy."
+  type = gets.chomp.downcase
+
+  sleep(1.0)
+
+  case type
+  when 'f'
+    puts "Your #{adj} #{noun} likes to #{verb} #{adv}? That's funny if you think about it!"
+  when 's'
+    puts "If you let your #{noun} #{verb} #{adv}, you will be haunted by a #{adj} ghost."
+  when 'h'
+    puts "Once upon a time, in a kingdom far, far, away, your #{adj} #{noun} #{verb} #{adv}. We all lived happily ever after!"
+  end
+
+  sleep(1.0)
+
+  puts "Would you like to go again? Type 'yes' or 'no':"
+  again = gets.chomp.downcase
+  break unless again == "yes"
+end
+
+puts "Thank you for playing. Goodbye!"
+
+# 8. 
+
+def reversed_number(num)
+  num.to_s.reverse.to_i
+end
+
+reversed_number(12345) == 54321
+reversed_number(12213) == 31221
+reversed_number(12000) == 21 # No leading zeros in return value!
+
+# 9.
+def center_of(str)
+  center_i = str.size / 2
+  str.size.odd? ? str[center_i] : str[center_i - 1] + str[center_i]
+end
+
+center_of('I love ruby') == 'e'
+center_of('Launch School') == ' '
+center_of('Launchschool') == 'hs'
