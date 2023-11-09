@@ -79,7 +79,16 @@ puts calculate_bonus(1000, false) == 0
 
 # 5. Write a method that will take a short line of text, and print it within a box.
 
-# TRY AGAIN 
+def print_in_box(str)
+  horizontal = "+-#{ "-" * str.size }-+"
+  empty = "|#{' '* (str.size + 2 )}|"
+
+  puts horizontal
+  puts empty
+  puts "| #{str} |"
+  puts empty
+  puts horizontal
+end
 
 # 6. Write a method that takes a positive integer, n, as an argument, and displays a right triangle whose sides each have n stars. The hypotenuse of the triangle (the diagonal side in the images below) should have one end at the lower-left of the triangle, and the other end at the upper-right.
 
@@ -201,7 +210,7 @@ puts calculate_bonus(2800, true) == 1400
 puts calculate_bonus(1000, false) == 0
 puts calculate_bonus(50000, true) == 25000
 
-# 5. REVIEW AGAIN. ISSUE GETTING "-"*num to work originally
+# 5. NEED TO PUT STR BEFORE NUMBER WHEN MULTIPLYING STR*INTEGER i.e. 5*' ' does not work but ' '*5 does
 def print_in_box(message)
   horizontal = "+#{'-' * (message.size + 2)}+"
   empty_line = "|#{' ' * (message.size + 2)}|"
