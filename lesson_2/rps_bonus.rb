@@ -1,6 +1,7 @@
 # ROCK PAPER SCISSORS LIZARD SPOCK BONUS GAME
+# USING CODE REVIEW FEEDBACK
 
-require 'abbrev' # to use .abbrev gem
+require 'abbrev' # required to use .abbrev module
 
 VALID_CHOICES = %w(rock paper scissors lizard spock).abbrev
 # creates a hash with all possible abbreviations linked to each value
@@ -124,25 +125,26 @@ loop do
   computer_score = 0
 
   sleep(5)
+  clear_screen
 
   loop do
     user_move = get_user_choice
     computer_move = computer_choice
 
-    clear_screen
-
     display_choices(user_move, computer_move)
-    sleep(1)
+    sleep(2)
     display_result(user_move, computer_move)
     user_score, computer_score = update_scores(user_move, computer_move, user_score, computer_score)
-    # assigns updated scores to local score variables. Without the explicit assignment here, scores would stay at 0.
+    # The above line assigns updated scores to local score variables
+    # Without explicit assignment, scores would stay at 0 due to scoping limits
+    clear_screen
     display_scores(user_score, computer_score)
-
     break if computer_score == 3 || user_score == 3
   end
 
   clear_screen
   display_final_winner(user_score, computer_score)
+  sleep(2)
   break unless play_again?
 end
 
