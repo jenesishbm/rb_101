@@ -1,4 +1,5 @@
 # ROCK PAPER SCISSORS LIZARD SPOCK BONUS GAME
+require 'abbrev'
 
 CHOICES_KEY = {
   "rock" => { abbreviation: 'r', beats: ['scissors', 'lizard'] },
@@ -10,6 +11,22 @@ CHOICES_KEY = {
 
 def prompt(message)
   puts(" => #{message}")
+end
+
+def display_welcome_message
+  prompt("Welcome to the Rock Paper Scissors Lizard Spock game!")
+  prompt("We will play until one of us wins 3 rounds.")
+end
+
+def display_instructions
+  puts <<-MSG
+  Here are the instructions:
+  => Rock crushes scissors and crushes lizard.
+  => Paper covers rock and disproves Spock.
+  => Scissors cuts paper and decapitates lizard.
+  => Lizard eats paper and poisons Spock.
+  => Spock vaporizes rock and smashes scissors.
+MSG
 end
 
 def abbrev?(input)
