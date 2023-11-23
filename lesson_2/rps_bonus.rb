@@ -1,19 +1,31 @@
 # ROCK PAPER SCISSORS LIZARD SPOCK BONUS GAME
-require 'abbrev'
 
-CHOICES_KEY = {
-  "rock" => { abbreviation: 'r', beats: ['scissors', 'lizard'] },
-  "paper" => { abbreviation: 'p', beats: ['rock', 'spock'] },
-  "scissors" => { abbreviation: 's', beats: ['paper', 'lizard'] },
-  "lizard" => { abbreviation: 'l', beats: ['paper', 'spock'] },
-  "spock" => { abbreviation: 'sp', beats: ['rock', 'scissors'] }
-}
+require 'abbrev' # to use .abbrev gem
+
+VALID_CHOICES = %w(rock paper scissors lizard spock).abbrev
+# creates a hash with all possible abbreviations linked to each value
+
+MOVES = {
+  'rock' => %w[lizard scissors],
+  'paper' => %w[rock spock],
+  'scissors' => %w[paper lizard],
+  'lizard' => %w[paper spock],
+  'spock' => %w[rock scissors]
+}.freeze # prevents changes from being made
+
+# METHOD DEFINITIONS
+
+def clear_screen
+  Gem.win_platform? ? (system "cls") : (system "clear")
+  # clears platform appropriately based on system
+end
 
 def prompt(message)
   puts(" => #{message}")
 end
 
 def display_welcome_message
+  clear_screen
   prompt("Welcome to the Rock Paper Scissors Lizard Spock game!")
   prompt("We will play until one of us wins 3 rounds.")
 end
@@ -29,71 +41,109 @@ def display_instructions
 MSG
 end
 
-def abbrev?(input)
-  CHOICES_KEY.values.map { |choice| choice[:abbreviation] }.include?(input)
+def computer_choice
+  MOVES.keys.sample
 end
 
-def find_key_by_abbrev(input)
-  CHOICES_KEY.each { |key, value| return key if value[:abbreviation] == input }
+def valid_move?(input)
+  VALID_CHOICES.include?(input)
 end
 
-def win?(first, second)
-  CHOICES_KEY[first][:beats].include?(second)
+def display_scissors_or_spock
+  prompt("Invalid choice. Type 'sc' for scissors or 'sp' for spock.")
 end
 
-def display_result(user, computer)
-  if win?(user, computer)
-    prompt("You won!")
-  elsif win?(computer, user)
-    prompt("You lose!")
-  else
+def display_invalid_input
+  prompt("Invalid choice. Try again.")
+end
+
+def get_user_choice
+  user_choice = ''
+  loop do
+    prompt("Choose one: #{MOVES.keys.join(', ')}")
+    prompt("('r', 'p', 'sc', 'l', or 'sp')")
+    user_choice = gets.chomp.downcase
+
+    break if valid_move?(user_choice)
+
+    user_choice == "s" ? display_scissors_or_spock : display_invalid_input
+  end
+  VALID_CHOICES[user_choice]
+end
+
+def display_choices(user, computer)
+  prompt("You chose #{user}. Computer chose #{computer}.")
+end
+
+def display_result(user_choice, computer_choice)
+  if user_choice == computer_choice
     prompt("It's a tie!")
+  elsif MOVES[user_choice].include?(computer_choice)
+    prompt("You win!")
+  else
+    prompt("Computer wins!")
   end
 end
 
+def update_scores(user_choice, computer_choice, user_score, computer_score)
+  if user_choice == computer_choice
+    # do nothing
+  elsif MOVES[user_choice].include?(computer_choice)
+    user_score += 1
+  else
+    computer_score += 1
+  end
+  [user_score, computer_score]
+end
+
+def display_scores(user_score, computer_score)
+  prompt("You have: #{user_score}  |  Computer has: #{computer_score}")
+end
+
+def display_final_winner(user_score, computer_score)
+  prompt("Game over! The final score is:")
+  prompt("You: #{user_score} | Computer: #{computer_score}")
+  prompt(user_score == 3 ? "YOU WIN!" : "COMPUTER WINS!")
+end
+
+def play_again?
+  prompt("Do you want to play again?")
+  gets.chomp.downcase.start_with?("y")
+end
+
+def display_goodbye
+  prompt("Thank you for playing! Goodbye.")
+end
+
+# MAIN LOOP
 loop do
-  prompt("Welcome to the Rock Paper Scissors Lizard Spock game!")
-  prompt("We will play until one of us wins 3 rounds.")
+  display_welcome_message
+  display_instructions
 
-  user_count = 0
-  comp_count = 0
+  user_score = 0
+  computer_score = 0
 
-  until user_count == 3 || comp_count == 3
-    user_choice = nil
+  sleep(5)
 
-    loop do
-      prompt("Choose one: #{CHOICES_KEY.keys.join(', ')}")
-      prompt("Type 'r' for rock, 'p' for paper, 's' for scissors, 'l' for lizard, or 'sp' for spock.")
-      user_choice = gets.chomp.downcase
-      break if abbrev?(user_choice)
-      puts "That's not a valid choice. Try again."
-    end
+  loop do
+    user_move = get_user_choice
+    computer_move = computer_choice
 
-    user_choice = find_key_by_abbrev(user_choice)
-    comp_choice = CHOICES_KEY.keys.sample
+    clear_screen
 
-    prompt("You chose #{user_choice}. Computer chose #{comp_choice}.")
+    display_choices(user_move, computer_move)
+    sleep(1)
+    display_result(user_move, computer_move)
+    user_score, computer_score = update_scores(user_move, computer_move, user_score, computer_score)
+    # assigns updated scores to local score variables. Without the explicit assignment here, scores would stay at 0.
+    display_scores(user_score, computer_score)
 
-    display_result(user_choice, comp_choice)
-
-    user_count += 1 if win?(user_choice, comp_choice)
-    comp_count += 1 if win?(comp_choice, user_choice)
+    break if computer_score == 3 || user_score == 3
   end
 
-  prompt("Computer is the grand winner!") if comp_count == 3
-  prompt("You are the grand winner!") if user_count == 3
-
-  result = <<-MSG
-  FINAL SCORE
-  You: #{user_count}
-  Computer: #{comp_count}
-  MSG
-
-  prompt(result)
-
-  prompt("Do you want to play again? Type 'y' for yes or 'n' for no.")
-  again = gets.chomp.downcase
-  break unless again.start_with?("y")
+  clear_screen
+  display_final_winner(user_score, computer_score)
+  break unless play_again?
 end
 
-prompt("Thank you for playing. Goodbye!")
+display_goodbye
